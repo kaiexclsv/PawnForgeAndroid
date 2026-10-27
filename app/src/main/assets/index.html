@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#111827">
+<title>PawnForge Mobile</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><div class="brand-mark">P</div><div><strong>PawnForge</strong><small>Mobile Pawn Editor</small></div></div>
+  <button id="menuBtn" class="icon-btn" aria-label="Menu">☰</button>
+</header>
+<main>
+  <section class="projectbar">
+    <div><span class="eyebrow">WORKSPACE</span><strong id="projectName">My Pawn Project</strong></div>
+    <button id="projectBtn" class="secondary-btn">Project ▾</button>
+  </section>
+  <nav id="tabs" class="tabs" aria-label="Open files"></nav>
+  <section class="toolbar">
+    <div class="toolbar-left"><span class="live-dot"></span><span id="fileStatus">Ready</span></div>
+    <div class="toolbar-actions">
+      <button id="openBtn" title="Open a file">Open</button>
+      <button id="saveBtn" title="Download current file">Save</button>
+      <button id="compileBtn" class="compile-btn"><span>▶</span> Compile</button>
+    </div>
+  </section>
+  <section class="editor-shell">
+    <div class="editor-head"><span id="currentFile">main.pwn</span><span id="cursorPos">Ln 1, Col 1</span></div>
+    <div class="editor-wrap">
+      <pre id="highlight" aria-hidden="true"></pre>
+      <textarea id="editor" spellcheck="false" autocapitalize="off" autocomplete="off" autocorrect="off" aria-label="Pawn source editor"></textarea>
+      <div id="lineNumbers" aria-hidden="true">1</div>
+    </div>
+  </section>
+  <section class="console-panel">
+    <div class="console-head"><div><span class="console-indicator"></span><strong>Output</strong></div><button id="clearConsole" class="text-btn">Clear</button></div>
+    <div id="console" class="console-body"><p class="muted">Welcome to PawnForge. Open or edit a .pwn file, then press Compile.</p></div>
+  </section>
+  <section id="settingsPanel" class="settings-panel hidden">
+    <div class="settings-title"><strong>Compiler settings</strong><button id="closeSettings" class="text-btn">Close ✕</button></div>
+    <p>Connect your own compiler API endpoint. It should accept JSON <code>{"filename":"main.pwn","source":"..."}</code> via POST and return JSON with <code>success</code>, <code>output</code>, and optionally a downloadable AMX URL.</p>
+    <label for="endpoint">Compile endpoint URL</label>
+    <input id="endpoint" type="url" placeholder="https://your-domain.example/api/compile">
+    <label for="apiKey">Optional API key</label>
+    <input id="apiKey" type="password" placeholder="Leave blank if not needed">
+    <button id="saveSettings" class="primary-btn">Save settings</button>
+    <p class="hint">No compiler server is included. Until you connect a real Pawn compiler backend, Compile will explain that setup is needed rather than pretending to compile.</p>
+  </section>
+  <input id="fileInput" type="file" accept=".pwn,.inc,.txt,.pawn" hidden>
+  <input id="projectInput" type="file" accept=".zip" hidden>
+  <div id="drawer" class="drawer hidden">
+    <button data-action="new">＋ New Pawn file</button>
+    <button data-action="open">⇧ Open source file</button>
+    <button data-action="project">▣ Import project ZIP</button>
+    <button data-action="settings">⚙ Compiler settings</button>
+    <button data-action="about">ⓘ About PawnForge</button>
+  </div>
+</main>
+<footer><span>PAWN LANGUAGE</span><span id="footerMode">UTF-8 · Spaces: 4</span></footer>
+<script src="app.js"></script>
+</body>
+</html>
